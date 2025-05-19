@@ -1,0 +1,158 @@
+<div class="search-container col-md-10 mx-auto">
+  <!-- Search Form -->
+  <div class="row justify-content-center mb-4">
+    <div>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Please enter an artist name."
+          [(ngModel)]="searchQuery"
+          (keyup.enter)="search()"
+        />
+        <button
+          class="btn btn-primary"
+          type="button"
+          (click)="search()"
+          [disabled]="!searchQuery"
+        >
+          Search
+          <!-- Loading Spinner in the button -->
+          <span
+            *ngIf="isSearchingArtist"
+            class="spinner-border spinner-border-sm me-1"
+            role="status"
+            aria-hidden="true"
+          ></span>
+        </button>
+        <button class="btn btn-secondary" type="button" (click)="clear()">
+          Clear
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Results -->
+  <div *ngIf="searchResults.length > 0" class="mb-4">
+    <div class="search-results-container">
+      <div class="scroll-container d-flex pb-3">
+        <div
+          *ngFor="let artist of searchResults"
+          class="artist-card card"
+          [class.active]="selectedArtist && selectedArtist.id === artist.id"
+          (click)="selectArtist(artist)"
+        >
+          <div class="position-relative">
+            <!-- Artist Image -->
+            <img
+              [src]="
+                artist.imageUrl === '/assets/shared/missing_image.png'
+                  ? 'artsy-logo.svg'
+                  : artist.imageUrl
+              "
+              class="card-img-top"
+              alt="{{ artist.title }}"
+            />
+
+            <!-- Favorite Button (for logged in users) -->
+            <!-- <button
+              *ngIf="isLoggedIn"
+              class="position-absolute top-0 end-0 favorite-btn"
+              [class.active]="artist.isFavorite"
+              (click)="toggleFavorite(artist.id, $event)"
+            > -->
+            <button
+              *ngIf="isLoggedIn"
+              class="top-0 end-0 favorite-btn"
+              [class.active]="artist.isFavorite"
+              (click)="toggleFavorite(artist.id, $event)"
+            >
+              <i
+                class="bi"
+                [ngClass]="artist.isFavorite ? 'bi-star-fill' : 'bi-star'"
+              ></i>
+            </button>
+          </div>
+
+          <!-- Artist Name -->
+          <div class="artist-name text-center text-truncate">
+            {{ artist.title }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Results Message -->
+  <div
+    *ngIf="
+      searchResults.length === 0 && !isSearching && !initSearch
+    "
+    class="alert alert-danger mb-4"
+  >
+    No results.
+  </div>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="isSearching" class="card-body spinner-container">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Artist Details -->
+  <div *ngIf="selectedArtist" class="artist-details mb-4">
+    <!-- Tabs -->
+    <div class="card-header">
+      <!-- <ul class="nav nav-tabs card-header-tabs"> -->
+      <ul class="nav nav-pills nav-justified">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="activeTab === 'info'"
+            href="javascript:void(0)"
+            (click)="switchTab('info')"
+          >
+            Artist Info
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="activeTab === 'artworks'"
+            href="javascript:void(0)"
+            (click)="switchTab('artworks')"
+          >
+            Artworks
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="isLoadingTab" class="card-body spinner-container">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <!-- Artist Info Tab -->
+    <!-- <div *ngIf="!isLoadingArtist && activeTab === 'info'" class="card-body">
+      <app-artist-info [artist]="selectedArtist" (loaded)="onContentLoaded()"></app-artist-info>
+    </div> -->
+    <div *ngIf="!isLoadingArtist && activeTab === 'info'" class="card-body">
+      <app-artist-info
+        [artistId]="selectedArtist.id"
+        (loaded)="onContentLoaded()"
+      ></app-artist-info>
+    </div>
+
+    <!-- Artworks Tab -->
+    <div *ngIf="!isLoadingArtist && activeTab === 'artworks'" class="card-body">
+      <app-artist-artworks
+        [artistId]="selectedArtist.id"
+        (loaded)="onContentLoaded()"
+      ></app-artist-artworks>
+    </div>
+  </div>
+</div>

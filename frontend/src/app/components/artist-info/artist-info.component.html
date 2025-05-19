@@ -1,0 +1,123 @@
+<div class="artist-info-container">
+  <!-- 整体内容需要确保artist已加载 -->
+  <div *ngIf="!isLoadingArtist && artist">
+    <div class="d-flex justify-content-center">
+      <span class="title clickable" (click)="navigateToArtistDetails()">{{
+        artist.name
+      }}</span>
+
+      <!-- Favorite button (for logged in users) -->
+      <!-- <button
+        *ngIf="isLoggedIn"
+        class="favorite-btn"
+        [class.active]="artist.isFavorite"
+        (click)="toggleFavorite(artist.id)"
+      >
+        <i
+          class="bi"
+          [ngClass]="artist.isFavorite ? 'bi-star-fill' : 'bi-star'"
+        ></i>
+      </button> -->
+
+      <button
+        *ngIf="isLoggedIn"
+        class="favorite-btn-info"
+        [class.active]="artist.isFavorite"
+        (click)="toggleFavorite(artist.id, $event)"
+      >
+        <i
+          class="bi"
+          [ngClass]="artist.isFavorite ? 'bi-star-fill' : 'bi-star'"
+        ></i>
+      </button>
+    </div>
+
+    <!-- Artist metadata -->
+    <div class="meta-info">
+      <span *ngIf="artist.nationality">{{ artist.nationality }}</span>
+      <span *ngIf="artist.birthday || artist.deathday">
+        , {{ artist.birthday || "Unknown" }} {{ artist.deathday ? "-" : "" }}
+        {{ artist.deathday || "" }}
+      </span>
+    </div>
+
+    <!-- Artist biography -->
+    <div class="biography mb-4" *ngIf="artist.biography">
+      <p [innerHTML]="artist.biography"></p>
+    </div>
+
+    <!-- Similar Artists (for logged in users) -->
+    <div *ngIf="isLoggedIn" class="similar-artists-section">
+      <h3 class="mt-4 mb-3">Similar Artists</h3>
+
+      <!-- Loading spinner -->
+      <!-- <div *ngIf="isLoadingSimilar" class="text-center my-4">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div> -->
+
+      <!-- Similar artists list -->
+      <div
+        *ngIf="!isLoadingSimilar && similarArtists.length > 0"
+        class="scroll-container d-flex pb-3"
+      >
+        <div
+          *ngFor="let artist of similarArtists"
+          class="artist-card card"
+          (click)="selectSimilarArtist(artist, $event)"
+        >
+          <div class="position-relative">
+            <!-- Artist Image -->
+            <img
+              [src]="
+                artist.imageUrl !== '/assets/shared/missing_image.png'
+                  ? artist.imageUrl
+                  : 'artsy-logo.svg'
+              "
+              class="card-img-top"
+              alt="{{ artist.name }}"
+            />
+
+            <!-- Favorite Button -->
+            <!-- <button
+              class="position-absolute top-0 end-0 favorite-btn"
+              [class.active]="artist.isFavorite"
+              (click)="toggleFavorite(artist.id)"
+            >
+              <i
+                class="bi"
+                [ngClass]="artist.isFavorite ? 'bi-star-fill' : 'bi-star'"
+              ></i>
+            </button> -->
+
+            <button
+              *ngIf="isLoggedIn"
+              class="top-0 end-0 favorite-btn"
+              [class.active]="artist.isFavorite"
+              (click)="toggleFavorite(artist.id, $event)"
+            >
+              <i
+                class="bi"
+                [ngClass]="artist.isFavorite ? 'bi-star-fill' : 'bi-star'"
+              ></i>
+            </button>
+          </div>
+
+          <!-- Artist Name -->
+          <div class="artist-name text-center text-truncate">
+            {{ artist.name }}
+          </div>
+        </div>
+      </div>
+
+      <!-- No similar artists message -->
+      <div
+        *ngIf="!isLoadingSimilar && similarArtists.length === 0"
+        class="alert alert-info"
+      >
+        No similar artists found.
+      </div>
+    </div>
+  </div>
+</div>

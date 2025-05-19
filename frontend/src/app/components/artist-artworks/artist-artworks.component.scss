@@ -1,0 +1,145 @@
+.artworks-container {
+  padding-top: 2rem;
+}
+
+
+.artwork-card {
+  transition: transform 0.2s;
+  font-size: 0.7rem;
+
+  img {
+    //   height: 180px;
+    height: fit-content;
+    object-fit: cover;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-text {
+    opacity: 0.75;
+  }
+
+  .clickable-footer {
+    cursor: pointer;
+    transition: background-color 0.2s;
+    opacity: 0.75;
+
+    &:hover {
+      opacity: 1;
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    &:active {
+      background-color: var(--btn-primary);
+    }
+  }
+}
+
+// Modal styles
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+.modal-container {
+  max-width: 90%;
+  width: 800px;
+  max-height: 90vh;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.modal-content {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #dee2e6;
+
+  .modal-title {
+    margin: 0;
+    font-weight: 600;
+    word-break: pre-wrap;
+  }
+
+  .btn-close {
+    border-width: 0.18rem;
+    border-style: solid;
+    border-color: rgba(44, 90, 157, 0.5);
+    padding: 0.2rem;
+    margin-right: 0.8rem;
+  }
+}
+
+.modal-section {
+  padding: 0.8rem 0.8rem;
+}
+
+.artwork-section {
+
+  .artwork-image {
+    max-height: 4rem;
+    object-fit: contain;
+  }
+
+  .artwork-title { 
+    font-weight: 400;
+    margin-bottom: 0.1rem;
+    font-size: 8pt;  
+  }
+
+  .artwork-date {
+    font-size: 8pt;  
+  }
+}
+
+.categories-section {
+  .category-card {
+    .card-body {
+      padding: 0.5rem;
+    }
+    img {
+      height: 11rem;
+      object-fit: cover;
+    }
+
+    .card-title {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .categories-section .category-card img {
+    height: 40vh
+  }
+}
+
+// @media (max-width: 575.98px) {
+//   .artwork-card img {
+//     height: 130px;
+//   }
+// }

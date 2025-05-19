@@ -1,0 +1,124 @@
+.card {
+  &:hover {
+    background-color: transparent !important;
+  }
+  transition: none !important; /* 禁用所有属性的过渡效果 */
+}
+
+.search-results-container {
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.scroll-container {
+  display: flex;
+  min-width: 100%;
+  padding-bottom: 10px;
+}
+
+.artist-card {
+  flex: 0 0 auto;
+  width: 12rem;
+  margin-right: 5px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    .artist-name {
+      background-color: #0d6efd;
+    }
+  }
+
+  &.active {
+    background-color: transparent;
+    border-color: #808080d3;
+
+    .artist-name {
+      background-color: #0d6efd;
+    }
+  }
+
+  .card-img-top {
+    height: 12rem;
+    object-fit: cover;
+  }
+
+  .artist-name {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 5px;
+    font-size: 0.9rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    
+    &:hover {
+      background-color: #0d6efd!important;
+    }
+  }
+}
+
+.input-group {
+  .form-control:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  }
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.favorite-btn {
+  background-color: var(--primary-color);
+  // color: #ccc;
+  font-size: 1.2rem;
+  margin-top: 0.2rem;
+  margin-right: 0.2rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+  //position-absolute top-0 end-0 
+  position: absolute;
+  cursor: pointer;
+
+  &.active {
+    color: #ffc107;
+  }
+
+  &:hover {
+    background-color: var(--primary-color);
+    color: #ffc107;
+  }
+}
+
+// @media (max-width: 767.98px) {
+//   .artist-card {
+//     width: 130px;
+
+//     .card-img-top {
+//       height: 110px;
+//     }
+
+//     .artist-name {
+//       font-size: 0.8rem;
+//     }
+//   }
+// }
+
+// @media (max-width: 575.98px) {
+//   .artist-card {
+//     width: 110px;
+//     margin-right: 10px;
+
+//     .card-img-top {
+//       height: 90px;
+//     }
+//   }
+// }

@@ -1,0 +1,154 @@
+<div class="artworks-container">
+  <!-- Loading spinner -->
+  <!-- <div *ngIf="isLoading" class="text-center my-4">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div> -->
+
+  <!-- No artworks message -->
+  <div *ngIf="!isLoading && artworks.length === 0" class="alert alert-danger">
+    No artworks.
+  </div>
+
+  <!-- Artworks grid -->
+  <div
+    *ngIf="!isLoading && artworks.length > 0"
+    class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4"
+  >
+    <div *ngFor="let artwork of artworks" class="col">
+      <!-- <div class="card h-100 artwork-card"> -->
+      <div class="card artwork-card text-center">
+        <!-- Artwork image -->
+        <img
+          [src]="
+            artwork.imageUrl !== '/assets/shared/missing_image.png'
+              ? artwork.imageUrl
+              : 'assets/artsy-logo.svg'
+          "
+          class="card-img-top img-fluid"
+          alt="{{ artwork.title }}"
+        />
+
+        <div class="card-body">
+          <!-- <h5 class="card-title">{{ artwork.title }}</h5> -->
+          <p class="card-text">
+            <!-- Artist name -->
+            <!-- Artwork title -->
+            <span>
+              {{ artwork.title }}
+            </span>
+
+            <!-- Artwork date -->
+            <span *ngIf="artwork.date"> , {{ artwork.date }} </span>
+          </p>
+
+          <!-- Categories button -->
+          <!-- <button
+            class="btn btn-sm btn-outline-primary"
+            (click)="openCategoriesModal(artwork)"
+          >
+            Categories
+          </button> -->
+        </div>
+        <!-- 新增card-footer -->
+        <div
+          class="card-footer clickable-footer"
+          (click)="openCategoriesModal(artwork)"
+        >
+          <span>View categories</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Categories Modal -->
+  <div
+    *ngIf="showModal"
+    class="modal-backdrop"
+    (click)="onModalBackdropClick($event)"
+  >
+    <div class="modal-container">
+      <div class="modal-content">
+        <!-- Modal header -->
+        <div class="modal-header">
+          <!-- <h5 class="modal-title">Categories</h5> -->
+          <!-- Modal body with artwork info -->
+          <div class="modal-section artwork-section" *ngIf="selectedArtwork">
+            <div class="row align-items-center">
+              <div class="col-2">
+                <img
+                  [src]="
+                    selectedArtwork.imageUrl !==
+                    '/assets/shared/missing_image.png'
+                      ? selectedArtwork.imageUrl
+                      : 'assets/artsy-logo.svg'
+                  "
+                  class="img-fluid artwork-image"
+                  alt="{{ selectedArtwork.title }}"
+                />
+              </div>
+              <div class="col-10" style="padding: 0%;">
+                <div class="artwork-title">{{ selectedArtwork.title }}</div>
+                <div class="artwork-date" *ngIf="selectedArtwork.date">
+                  {{ selectedArtwork.date }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="closeModal()"
+          ></button>
+        </div>
+
+        <!-- Modal body with categories -->
+        <div class="modal-section categories-section">
+          <!-- Loading spinner -->
+          <div *ngIf="isLoadingCategories" class="text-center my-4">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+
+          <!-- No categories message -->
+          <div
+            *ngIf="!isLoadingCategories && categories.length === 0"
+            class="alert alert-info"
+          >
+            No categories.
+          </div>
+
+          <!-- Categories grid -->
+          <div
+            *ngIf="!isLoadingCategories && categories.length > 0"
+            class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4"
+          >
+            <div *ngFor="let category of categories" class="col">
+              <div class="card h-100 category-card">
+                <!-- Category image -->
+                <img
+                  [src]="
+                    category.imageUrl !== '/assets/shared/missing_image.png'
+                      ? category.imageUrl
+                      : 'assets/artsy-logo.svg'
+                  "
+                  class="card-img-top"
+                  alt="{{ category.name }}"
+                />
+
+                <div class="card-body">
+                  <!-- Category name -->
+                  <span class="card-title text-center">{{ category.name }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="favorites-container">
+  <!-- <h2 class="mb-4">Favorite Artists</h2> -->
+
+  <!-- Loading spinner -->
+  <div *ngIf="isLoading" class="text-center my-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- No favorites message -->
+  <div
+    *ngIf="!isLoading && favorites.length === 0"
+    class="alert alert-danger text-center"
+  >
+    No favorite artists.
+  </div>
+
+  <!-- Favorites list -->
+  <div
+    *ngIf="!isLoading && favorites.length > 0"
+    class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"
+  >
+    <div *ngFor="let favorite of favorites" class="col">
+      <div
+        class="card h-100 favorite-card"
+        (click)="goToArtistDetails(favorite.artistId)"
+      >
+        <!-- Background image -->
+        <div
+          class="favorite-card-bg"
+          [style.background-image]="'url(' + favorite.imageUrl + ')'"
+        ></div>
+
+        <div class="card-body">
+          <!-- Artist name -->
+          <h5 class="card-title">{{ favorite.artistName }}</h5>
+
+          <!-- Artist info -->
+          <div class="card-text">
+            <small>
+              {{ favorite.birthday }}
+              <span *ngIf="favorite.birthday && favorite.deathday"> - </span>
+              {{ favorite.deathday }}
+            </small>
+          </div>
+          <div class="card-text" *ngIf="favorite.nationality">
+            <small>{{ favorite.nationality }}</small>
+          </div>
+        </div>
+        <!-- Added time -->
+        <div class="card-footer">
+          <span class="card-text">
+            <small>Added {{ favorite.addedAt | relativeTime }}</small>
+          </span>
+
+          <!-- Remove button -->
+          <button
+            class="btn btn-sm btn-link remove-btn"
+            (click)="removeFavorite(favorite.artistId, $event)"
+          >
+             Remove
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

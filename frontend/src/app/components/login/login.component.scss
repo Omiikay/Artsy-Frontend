@@ -1,0 +1,54 @@
+.login-container {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+
+  &:hover {
+    background-color: transparent !important;
+  }
+  transition: none !important; /* 禁用所有属性的过渡效果 */
+}
+.card-title {
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.form-label {
+  font-weight: 500;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(32, 83, 117, 0.25);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+
+  &:hover,
+  &:focus {
+    background-color: var(--primary-hover-color);
+    border-color: var(--primary-hover-color);
+  }
+
+  &:disabled {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    opacity: 0.65;
+  }
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--primary-hover-color);
+    text-decoration: underline;
+  }
+}

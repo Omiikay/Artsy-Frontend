@@ -1,0 +1,54 @@
+.navbar-brand {
+  padding: 0.5rem 1rem;
+}
+
+#navbarNav {
+  padding-right: 1rem;
+}
+
+.nav-item {
+  align-content: center;
+}
+
+.nav-link.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  right: 0 !important;
+  &.show {
+    display: block;
+  }
+}
+
+.dropdown-divider {
+  margin: 0;
+}
+
+.nav-link {
+  
+  font-size: 10pt;
+  color: black;
+}
+
+.nav-pills .nav-link {
+  padding: 0.3rem 1rem;
+}
+
+.dropdown-item {
+  cursor: pointer;
+}
+
+@media (max-width: 767.98px) {
+  .dropdown-toggle {
+    img {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
