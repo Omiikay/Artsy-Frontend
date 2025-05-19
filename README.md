@@ -6,6 +6,8 @@ This portal can be reached on: https://csci571-hw5-nrocikay.wl.r.appspot.com/
 
 Details about the back end can be found in this [repo](https://github.com/Omiikay/Artsy-Backend).
 
+Details about the Android end can be found in this [repo](https://github.com/Omiikay/Artsy-Android).
+
 ## Overview
 
 This Angular application provides a responsive user interface for searching and exploring artists using the Artsy API. It allows users to browse artist details, view artworks, and manage favorite artists through a modern, intuitive interface.
