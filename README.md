@@ -1,6 +1,10 @@
 # Artist Search - Frontend
 
-The frontend application for the Artist Search platform, built with Angular, TypeScript, and Bootstrap.
+The frontend application for the Artist Search Protal, built with Angular, TypeScript, and Bootstrap.
+
+This portal can be reached on: https://csci571-hw5-nrocikay.wl.r.appspot.com/
+
+Details about the back end can be found in this [repo](https://github.com/Omiikay/Artsy-Backend).
 
 ## Overview
 
@@ -19,7 +23,7 @@ This Angular application provides a responsive user interface for searching and 
 
 ## Technology Stack
 
-- **Framework**: Angular 17
+- **Framework**: Angular 19.2
 - **Language**: TypeScript
 - **UI Framework**: Bootstrap 5
 - **State Management**: RxJS
@@ -49,8 +53,9 @@ graph TD
     B2 --> BD[Artist Info]
     B2 --> BE[Artist Artworks]
     B2 --> BF[Favorites]
-    B2 --> BG[Login/Register]
-    
+    B2 --> BG[Artist Details]
+    B2 --> BI[Login/Register]
+
     B3 --> BH[Notification]
     
     C --> CA[Artsy Service]
@@ -74,8 +79,9 @@ frontend/
 │   │   │   ├── header/                # Site header with navigation
 │   │   │   ├── footer/                # Site footer
 │   │   │   ├── search/                # Search form and results
-│   │   │   ├── artist-info/           # Artist biography and details
+│   │   │   ├── artist-info/           # Artist's infomation
 │   │   │   ├── artist-artworks/       # Artist's artworks display
+│   │   │   ├── artist-details/       # Artist's details
 │   │   │   ├── notification/          # Notification system
 │   │   │   ├── login/                 # User login
 │   │   │   ├── register/              # User registration
@@ -105,8 +111,7 @@ frontend/
 │   │   ├── app.module.ts              # Main module
 │   │   └── app-routing.module.ts      # Application routes
 │   │
-│   ├── assets/                        # Static assets
-│   ├── environments/                  # Environment configurations
+│   ├── public/                        # Static assets
 │   ├── index.html                     # Main HTML file
 │   ├── main.ts                        # Application entry point
 │   └── styles.scss                    # Global styles
@@ -211,7 +216,7 @@ The build artifacts will be stored in the `dist/` directory, ready for deploymen
 
 2. Create an `app.yaml` file in the project root:
    ```yaml
-   runtime: nodejs14
+   runtime: nodejs22
    
    handlers:
    - url: /(.*\.(js|css|ico|png|jpg|svg|woff|woff2|ttf|eot))$
@@ -227,7 +232,3 @@ The build artifacts will be stored in the `dist/` directory, ready for deploymen
    ```
    gcloud app deploy
    ```
-
-## License
-
-This project is part of an academic assignment for CSCI 571. All rights reserved.
